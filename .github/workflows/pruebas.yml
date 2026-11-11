@@ -1,0 +1,54 @@
+# Comprobaciones automáticas en cada subida a GitHub y en cada pull request:
+# tipos y reglas de código, pruebas unitarias y pruebas completas en Chrome.
+# Si algo falla, GitHub lo marca en rojo en el commit.
+name: Pruebas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: pruebas-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Tipos y reglas de código
+        run: npm run lint
+
+      - name: Pruebas unitarias
+        run: npm run test:unit
+
+      - name: Compilar y pruebas completas en Chrome
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm test
+
+      - name: Pruebas con la CPU ralentizada x4 (detecta esperas frágiles)
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          CPU_LENTA: 4
+        run: node tests/run.mjs
+
+      - name: Guardar la app compilada
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Lean-A3
+          path: dist/Lean-A3.html
+          if-no-files-found: ignore

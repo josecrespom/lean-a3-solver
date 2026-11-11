@@ -1,0 +1,325 @@
+@import 'tailwindcss';
+
+/* Tipografía: Manrope (incluida en la app, no depende de internet) */
+@font-face {
+  font-family: 'Manrope Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('../node_modules/@fontsource-variable/manrope/files/manrope-latin-ext-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tono intermedio entre neutral-800 y neutral-900 (Tailwind no lo trae de serie) */
+@theme {
+  --font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'SFMono-Regular', Menlo, monospace;
+  --color-neutral-850: oklch(0.237 0 0);
+}
+
+@layer base {
+  /* Controles nativos (desplegables, calendarios, barras) en el tema correcto.
+     Las opciones de un <select> las pinta el sistema: sin esto, en oscuro
+     salían con fondo blanco y letra blanca. */
+  :root {
+    color-scheme: light;
+  }
+  :root.dark {
+    color-scheme: dark;
+  }
+  option,
+  optgroup {
+    background-color: #ffffff;
+    color: var(--color-neutral-900);
+  }
+  .dark option,
+  .dark optgroup {
+    background-color: var(--color-neutral-900);
+    color: var(--color-neutral-100);
+  }
+
+  /* Foco visible al navegar con el teclado. Muchos controles llevan
+     outline-none por estética; esto lo recupera solo para el teclado. */
+  :where(
+    button,
+    a,
+    select,
+    summary,
+    abbr,
+    [role='button'],
+    [tabindex]:not([tabindex='-1']),
+    input[type='checkbox'],
+    input[type='radio'],
+    input[type='date'],
+    input[type='file']
+  ):focus-visible {
+    outline: 2px solid #2563eb !important;
+    outline-offset: 2px;
+  }
+  .dark
+    :where(
+      button,
+      a,
+      select,
+      summary,
+      abbr,
+      [role='button'],
+      [tabindex]:not([tabindex='-1']),
+      input[type='checkbox'],
+      input[type='radio'],
+      input[type='date'],
+      input[type='file']
+    ):focus-visible {
+    outline-color: #60a5fa !important;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Custom scrollbars for diagrams */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark Mode scrollbars */
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* 5 Whys Tree Styling */
+.tree-container ul {
+  padding-top: 18px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.tree-container li {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 18px 8px 0 8px;
+}
+
+/* Connecting lines */
+.tree-container li::before,
+.tree-container li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 2px solid #cbd5e1;
+  width: 50%;
+  height: 18px;
+}
+
+.tree-container li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #cbd5e1;
+}
+
+.tree-container li:only-child::after,
+.tree-container li:only-child::before {
+  display: none;
+}
+
+.tree-container li:only-child {
+  padding-top: 0;
+}
+
+.tree-container li:first-child::before,
+.tree-container li:last-child::after {
+  border: 0 none;
+}
+
+.tree-container li:last-child::before {
+  border-right: 2px solid #cbd5e1;
+  border-radius: 0 6px 0 0;
+}
+
+.tree-container li:first-child::after {
+  border-radius: 6px 0 0 0;
+}
+
+.tree-container ul ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #cbd5e1;
+  width: 0;
+  height: 18px;
+}
+
+/* Dark mode tree connectors */
+.dark .tree-container li::before,
+.dark .tree-container li::after,
+.dark .tree-container li:last-child::before,
+.dark .tree-container ul ul::before {
+  border-color: #475569;
+}
+
+/* Root Cause Navy Blue Card Class */
+.root-cause-navy {
+  background-color: #0f274a !important;
+  border-color: #1e3a8a !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(15, 39, 74, 0.35) !important;
+}
+
+.root-cause-navy textarea,
+.root-cause-navy input {
+  color: #ffffff !important;
+}
+
+.root-cause-navy textarea::placeholder,
+.root-cause-navy input::placeholder {
+  color: #93c5fd !important;
+}
+
+/* Numbered Badge for Root Cause */
+.root-badge-counter {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: #dc2626;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 9999px;
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 30;
+}
+
+/* =========================================================
+   RIGOROUS DIN A3 LANDSCAPE PRINT SPECIFICATIONS
+   Standard DIN A3 = 420mm × 297mm
+   ========================================================= */
+@page {
+  size: A3 landscape;
+  size: 420mm 297mm;
+  margin: 6mm;
+}
+
+@media print {
+  /* Force exact background colors (Navy, Red, Gray) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    font-size: 11px !important;
+  }
+
+  /* Hide screen-only interactive UI */
+  .no-print,
+  .screen-only,
+  header,
+  nav,
+  .zoom-controls,
+  .expand-btn,
+  .node-action-bar,
+  .add-cause-btn,
+  .spine-controls {
+    display: none !important;
+  }
+
+  /* Show print-only document */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Printable Sheet takes over entire A3 page */
+  .a3-print-document {
+    display: block !important;
+    /* Ajuste a una hoja: lo calcula src/utils/printFit.ts antes de imprimir */
+    zoom: var(--a3-print-zoom, 1);
+    width: var(--a3-print-width, 100%) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Unset interactive zoom transform for print */
+  #a3-printable-document-node {
+    transform: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Inputs and Textareas in print mode */
+  input,
+  textarea {
+    border: none !important;
+    box-shadow: none !important;
+    resize: none !important;
+    background: transparent !important;
+  }
+}

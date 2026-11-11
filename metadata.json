@@ -1,0 +1,5 @@
+{
+  "name": "Lean A3 Problem Solver",
+  "description": "Herramienta estructurada de resolución de problemas Lean A3 con Árbol de 5 Por Qués, Espina de Ishikawa interactiva, 5W1H e impresión DIN A3 horizontal.",
+  "requestFramePermissions": []
+}

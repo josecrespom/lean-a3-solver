@@ -1,0 +1,39 @@
+========================================================================
+  LEAN A3 PROBLEM SOLVER
+========================================================================
+
+CÓMO USARLO (no hay que instalar nada)
+------------------------------------------------------------------------
+1. Abre el archivo  Lean-A3.html  con doble clic.
+   Usa Google Chrome o Microsoft Edge.
+
+2. La primera vez, pulsa "Guardar en un archivo" en la barra superior
+   y elige dónde guardar tus A3 (por ejemplo, una carpeta compartida
+   del equipo). Desde ese momento, cada cambio se guarda solo.
+
+3. Las siguientes veces, al abrir la app pulsa "Reconectar" para seguir
+   trabajando sobre el mismo archivo.
+
+No necesita conexión a internet.
+
+TRABAJO EN EQUIPO
+------------------------------------------------------------------------
+- Varias personas pueden usar el mismo archivo de almacén en una
+  carpeta compartida. Si alguien guarda cambios mientras tú trabajas,
+  la app te avisará antes de sobrescribir nada.
+- Para enviar un A3 concreto a otra persona, usa el botón de descarga
+  JSON de su tarjeta; quien lo reciba lo carga con "Importar JSON".
+
+SI USAS FIREFOX O SAFARI
+------------------------------------------------------------------------
+Estos navegadores no permiten guardar en un archivo desde una página.
+Tus A3 se guardarán solo en el navegador: descarga una copia con el
+botón "Descargar copia" de vez en cuando para no perderlos.
+
+GUÍA Y EJEMPLOS
+------------------------------------------------------------------------
+Cada paso del A3 incluye la "Guía Sensei" con preguntas clave y un
+ejemplo bien hecho y otro a evitar. Desde el almacén puedes cargar
+además un A3 de ejemplo completo ("Cargar ejemplo completo").
+
+========================================================================

@@ -1,0 +1,15 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+
+# Datos de trabajo locales (no versionar)
+datos/
+# ZIPs generados por la app
+*.zip
+
+# Copia de la app compilada para uso local
+/Lean-A3.html
